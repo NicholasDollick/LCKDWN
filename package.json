@@ -1,0 +1,36 @@
+{
+  "name": "lckdwn",
+  "version": "0.0.1",
+  "description": "",
+  "main": "content.js",
+  "scripts": {
+    "test": "test",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasDollick/LCKDWN.git"
+  },
+  "author": "Nick Dollick & Dylan Stackhouse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicholasDollick/LCKDWN/issues"
+  },
+  "homepage": "https://github.com/NicholasDollick/LCKDWN#readme",
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "ts-loader": "^4.4.2"
+  }
+}
