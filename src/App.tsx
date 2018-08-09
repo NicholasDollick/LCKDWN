@@ -34,12 +34,8 @@ class App extends React.Component {
     chrome.storage.local.set(storedObj, ()=> console.log(`pushed ${value} to storage key ${key}`));
   }
 
-  addDomain() {
-    // return curried function that pushes 'value' to the array stored locally at 'domains'
-    return function(value: any) {
-      // TODO create type for domain
+  addDomain(value: any) {
       this.pushToStorageArray('domains', value);
-    }.bind(this);
   }
 
   render() {
