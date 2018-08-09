@@ -1,5 +1,5 @@
 {
-  "manigest_version": 2,
+  "manifest_version": 2,
   "name": "LCKDWN",
   "version": "0.1",
   "content_scripts": [
@@ -11,12 +11,13 @@
     }
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": true
   },
   "permissions": [
     "storage"
   ],
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "media/icon.png"
   }
 }
