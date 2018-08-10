@@ -1,7 +1,7 @@
 {
   "name": "lckdwn",
   "version": "0.0.1",
-  "description": "",
+  "description": "LCKDWN - Domain Access Manager",
   "main": "content.js",
   "scripts": {
     "test": "test",
