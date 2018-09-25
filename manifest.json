@@ -15,7 +15,8 @@
     "persistent": true
   },
   "permissions": [
-    "storage"
+    "storage",
+    "debugger"
   ],
   "browser_action": {
     "default_icon": "media/icon.png"

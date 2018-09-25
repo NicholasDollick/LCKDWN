@@ -1,5 +1,6 @@
 interface Blacklistable {
   blacklist: boolean;
+  // add time frames here
 }
 
 interface Page extends Blacklistable {
@@ -10,7 +11,7 @@ interface UrlPattern extends Blacklistable {
   regex: RegExp;
 };
 
-export default class Domain {
+export default class ControlledDomain {
   domain: string;
   blacklist: boolean;
   patterns: UrlPattern[];

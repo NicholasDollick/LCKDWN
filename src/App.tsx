@@ -1,11 +1,22 @@
 import * as React from 'react';
-import DomainAdd from './components/forms/DomainAdd';
+import AddDomainForm from './components/forms/AddDomainForm';
 
-class App extends React.Component {
+import DomainList from './components/DomainList';
+
+import ControlledDomain from './models/ControlledDomain';
+
+type State = {
+  domains: ControlledDomain[]
+}
+
+class App extends React.Component<{}, State> {
   title: string;
 
   constructor(props) {
     super(props);
+    this.state = {
+      domains: []
+    }
     this.title = 'LCKDWN - Domain Access Manager';
 
     this.addDomain = this.addDomain.bind(this);
@@ -13,29 +24,49 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setStateFromStorage.call(this, ['domains']);
+    this.setStateFromStorage('domains');
   }
   
   setStateFromStorage(key: string) {
     // set state value 'key' to the corresponding local storage value
 
-    chrome.storage.local.get(key, result => {
-      this.setState({
-        key: result,
-      });
-    });
+    // chrome.storage.local.get(key, function(result) {
+    //   let newState = this.state;
+    //   newState[key] = result[key];
+    //   this.setState(newState);
+
+    //   console.log(result)
+    // }.bind(this));
+
+    let result = localStorage.getItem(key);
+    console.log(result);
+    let newState = this.state;
+    newState[key] = result[key];
+    this.setState(newState);
+    
   }
 
   pushToStorageArray(key: string, value: any) {
-    let storedObj: Object;
-    chrome.storage.local.get([key], result => {storedObj = result});
-    storedObj[key].push(value);
+    chrome.storage.local.get([key], result => {
+      if(!result[key]) {
+        result[key] = [];
+      }
+      result[key].push(value);
 
-    chrome.storage.local.set(storedObj, ()=> console.log(`pushed ${value} to storage key ${key}`));
+      chrome.storage.local.set(result, ()=> {
+        console.log(`pushed ${value} to storage key ${key}`)
+      });
+    });
+
+
   }
 
-  addDomain(value: any) {
+  addDomain(value: ControlledDomain){
       this.pushToStorageArray('domains', value);
+      
+      let domains = this.state.domains;
+      domains.push(value);
+      this.setState({domains});
   }
 
   render() {
@@ -43,7 +74,8 @@ class App extends React.Component {
       <div>
         <h1>{this.title}</h1>
         <div className="body">
-          <DomainAdd addDomain={this.addDomain}/>
+          <AddDomainForm addDomain={this.addDomain}/>
+          {/* <DomainList domains={this.state.domains}/> */}
         </div>
       </div>
     )

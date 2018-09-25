@@ -1,19 +1,20 @@
 import * as React from 'react';
+import ControlledDomain from '../../models/ControlledDomain';
 
 type State = {
-  domain: string
+  domain: ControlledDomain
 }
 interface Props {
-  addDomain: (domain: string) => void
+  addDomain: (domain: ControlledDomain) => void
 }
 
-export default class DomainAdd extends React.Component<Props, State> {
+export default class AddDomainForm extends React.Component<Props, State> {
   public readonly state: State;
 
   constructor(props) {
     super(props);
     this.state = {
-      domain: ''
+      domain: new ControlledDomain()
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,7 @@ export default class DomainAdd extends React.Component<Props, State> {
     this.props.addDomain(this.state.domain);
 
     let newState = this.state;
-    newState['domain'] = '';
+    newState['domain'] = new ControlledDomain();
 
     this.setState(newState);
   }
@@ -45,7 +46,7 @@ export default class DomainAdd extends React.Component<Props, State> {
       <form onSubmit={this.handleSubmit}>
         <fieldset>
           <label htmlFor="domain">Domain</label>
-          <input type="text" value={this.state.domain} onChange={e => {this.handleChange(e, 'domain')}} name="domain" />
+          <input type="text" value={this.state.domain.domain} onChange={e => {this.handleChange(e, 'domain')}} name="domain" />
         </fieldset>
         <input type="submit" value="add" />
       </form>
