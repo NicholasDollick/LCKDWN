@@ -4,9 +4,8 @@
   "version": "0.1",
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
+      "run_at": "document_start",
+      "matches": ["<all_urls>"],
       "js": ["dist/content.bundle.js"]
     }
   ],
@@ -24,5 +23,8 @@
   "options_ui" : {
     "page": "index.html",
     "open_in_tab": true
-  }
+  },
+  "web_accessible_resources": [
+    "index.html"
+  ]
 }
