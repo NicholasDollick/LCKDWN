@@ -23,7 +23,8 @@ export default class AddDomainForm extends React.Component<Props, State> {
 
   handleChange(e, property) {
     let newState = this.state;
-    newState[property] = e.target.value;
+    let domainProp = e.target.name;
+    newState[property][domainProp] = e.target.value;
 
     this.setState(newState);
   }

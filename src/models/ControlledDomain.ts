@@ -24,6 +24,10 @@ export default class ControlledDomain {
     this.pages = pages;
   }
 
+  toString() {
+    return this.domain;
+  }
+
   addPage(page: Page) {
     if (this.isValidUrl(page.url)) {
       return this.pages.push(page);

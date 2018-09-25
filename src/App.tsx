@@ -21,6 +21,7 @@ class App extends React.Component<{}, State> {
 
     this.addDomain = this.addDomain.bind(this);
     this.setStateFromStorage = this.setStateFromStorage.bind(this);
+    this.pushToStorageArray = this.pushToStorageArray.bind(this);
   }
 
   componentDidMount() {
@@ -29,20 +30,17 @@ class App extends React.Component<{}, State> {
   
   setStateFromStorage(key: string) {
     // set state value 'key' to the corresponding local storage value
-
-    // chrome.storage.local.get(key, function(result) {
-    //   let newState = this.state;
-    //   newState[key] = result[key];
-    //   this.setState(newState);
-
-    //   console.log(result)
-    // }.bind(this));
-
-    let result = localStorage.getItem(key);
-    console.log(result);
     let newState = this.state;
-    newState[key] = result[key];
-    this.setState(newState);
+
+    chrome.storage.local.get([key], result => {
+      console.log(newState);
+
+      if(!result[key]) {
+        result[key] = [];
+      }
+      newState[key] = result[key];
+      this.setState(newState);
+    });
     
   }
 
@@ -75,7 +73,7 @@ class App extends React.Component<{}, State> {
         <h1>{this.title}</h1>
         <div className="body">
           <AddDomainForm addDomain={this.addDomain}/>
-          {/* <DomainList domains={this.state.domains}/> */}
+          <DomainList domains={this.state.domains}/>
         </div>
       </div>
     )
